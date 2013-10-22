@@ -34,6 +34,7 @@ body{
 
 .jumps .jobs,.tomato,.todo{
     padding-top: 20px;
+    text-align: center;
 }
 
 .jumps .jobs, .todo{
@@ -42,13 +43,18 @@ body{
     background-color: #1ABC9C;
     border-bottom: none;
     min-height: 260px;
+
+}
+
+.jumps .jobs,.todo .icon{
+    opacity: 0.5;
 }
 
 .jumps .tomato{
-    text-align: center;
+
 }
 
-.jumps .tomato .clock{
+.jumps .icon{
     margin:40px;
 }
 
