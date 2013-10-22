@@ -57,14 +57,17 @@ body{
 
 }
 
-.jumps .tomato .clock_display{
+.jumps .tomato .clock{
     text-align: center;
-    font-size: 50px;
     vertical-align: middle;
     height: 240px;
     height: 240px;
     line-height: 200px;
+}
+
+.jumps .tomato .clock .clock_display{
     font-weight: bolder;
+    font-size: 50px;
 }
 
 .jumps .icon{
