@@ -25,7 +25,7 @@
                    <div class="btn-group">
                       <a class="btn btn-primary active"><span class="glyphicon glyphicon-dashboard"></span></a>
                       <a class="btn btn-primary" ><span class="glyphicon glyphicon-camera"></span></a>
-                      <a class="btn btn-primary" ><span class="glyphicon glyphicon-check"></span></span></a>
+                      <a class="btn btn-primary" ><span class="glyphicon glyphicon-check"></span></a>
                       <span class="dropdown-arrow dropdown-arrow-inverse"></span>
                       <a class="btn btn-primary" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
                       <span class="dropdown-arrow dropdown-arrow-inverse"></span>
@@ -75,11 +75,8 @@
                         <img class="icon" src="../static/icons/loop.svg"/>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="well well-sm tomato">
-                        <img class="icon" src="../static/icons/clocks.svg"/>
-                        <a class="btn btn-block btn-lg btn-primary">Start New Tomato</a>
-                    </div>
+                <div id="tomato" class="col-md-4">
+                    
                 </div>
                 <div class="col-md-4">
                     <div class="well well-sm todo">
@@ -98,13 +95,32 @@
 
         </div>
     </div>
+    <script type="text/template" id="tormato-init-template">
+      <div class="well well-sm tomato">
+          <div class='trigger'>
+            <img class="icon" src="../static/icons/clocks.svg"/>
+            <a class="btn btn-block btn-lg btn-primary">Start New Tomato</a>
+          </div>
+          <div class='clock'>
+            <div class="clock_display"></div>
+          </div>
+          
+      </div>
+    </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/underscore.js"></script>
+    <script src="../static/js/backbone.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../static/js/bootstrap.min.js"></script>
     <!--<script src="../static/js/bootstrap-switch.js"></script>-->
     <!--<script src="../static/js/bootstrap-select.js"></script>-->
     <script src="../static/js/flatui-checkbox.js"></script>
     <script src="../static/js/flatui-radio.js"></script>
+
+    <script src="../static/js/app/view/tormato_view.js"></script>
+    <script src="../static/js/app/router/router.js"></script>
+    <script src="../static/js/app/application.js"></script>
+
   </body>
 </html>
