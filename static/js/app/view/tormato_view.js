@@ -1,5 +1,5 @@
 var app = app || {};
-var SENCONDS = 10; //25 minutes
+var SENCONDS = 1500; //25 minutes
 
 app.TormatoView = Backbone.View.extend({
 
