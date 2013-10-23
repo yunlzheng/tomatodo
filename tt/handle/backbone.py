@@ -97,7 +97,7 @@ class MongoBackboneHandler(BackboneHandler):
 
     @load_model
     def get_collection(self, *args):
-     
+
         return self.model.objects()
 
     @load_model

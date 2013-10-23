@@ -1,10 +1,10 @@
 var app = app || {};
-var SENCONDS = 1500; //25 minutes
+var SENCONDS = 5; //25 minutes
 var ENTER_KET = 13;
 
-app.TormatoView = Backbone.View.extend({
+app.Tormato = Backbone.View.extend({
 
-	el: "#tomato",
+	el: "#tomotodo",
 
 	clock: null,
 
@@ -19,13 +19,34 @@ app.TormatoView = Backbone.View.extend({
 
 	initialize: function() {
 
-		this.render();
+        this.$tomato = this.$("#tomato");
+        this.$tomato_list = this.$("#tomato-list");
+        this.$tomato_staus = this.$("#tomato-status");
+
+        this.listenTo(app.Tomatos, 'add', this.addOneTomato);
+        this.listenTo(app.Tomatos, 'reset', this.addAllTomato);
+        this.listenTo(app.Tomatos, 'all', this.render);
+
+        app.Tomatos.fetch();
 		
 	},
 
 	render: function() {
 
-		this.$el.html( this.template() );
+        if( app.Tomatos.length ){
+
+            this.$tomato_list.show();
+            this.$tomato_staus.hide();
+
+        }else{
+
+            this.$tomato_list.hide();
+            this.$tomato_staus.show();
+
+        }
+
+		this.$tomato.html( this.template() );
+        // 番茄相关
 		this.$trigger = this.$('.trigger');
 		this.$clock = this.$('.clock');
         this.$summary = this.$('.summary');
@@ -35,13 +56,28 @@ app.TormatoView = Backbone.View.extend({
 
 	},
 
+    addOneTomato: function(tomato){
+
+        var view = new app.TomatoView( { model: tomato } );
+        this.$tomato_list.prepend( view.render().el );
+       
+    },
+
+    addAllTomato: function(){
+
+        this.$tomato_list.html("");
+
+        app.Tomatos.each(this.addOneTomato, this);
+
+    },
+
     createTomatoOnEnter: function(event){
 
         if( event.which !==ENTER_KET || !this.$input_summary.val().trim()){
             return;
         }
         //TODO：后台创建一个番茄记录
-        this.$input_summary.val("");
+
         this.finishTomato();
 
     },
@@ -49,9 +85,11 @@ app.TormatoView = Backbone.View.extend({
     //完成一个番茄
     finishTomato: function(){
 
+        app.Tomatos.create({ title : this.$input_summary.val() });
+        this.$input_summary.val("");
         this.$summary.hide();
         this.$trigger.show();
-        that.$clock_display.text("任务即将开始");
+        this.$clock_display.text("任务即将开始");
 
     },
 
@@ -97,6 +135,7 @@ app.TormatoView = Backbone.View.extend({
 		window.clearInterval(this.clock);
 		this.$summary.show();
 		this.$clock.hide();
+        this.$input_summary.focus();
         //调用html5 audio播放提示音
          var hasVideo = !!(document.createElement('video').canPlayType);
          if(hasVideo==true){

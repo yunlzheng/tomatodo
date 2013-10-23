@@ -67,14 +67,17 @@
             </div>
       </div>
     </div>
-    <div class="jumps">
+    <div id="tomotodo" class="jumps">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="well well-sm jobs">
-                        <div>
+                        <ul id="tomato-list">
+
+                        </ul>
+                        <div id="tomato-status">
                              <img class="icon" src="../static/icons/loop.svg"/>
-                            <div>还没有完成的Tomoto</div>
+                             <div>还没有完成的Tomoto</div>
                         </div>
                     </div>
                 </div>
@@ -115,6 +118,12 @@
           </div>
       </div>
     </script>
+    <script type="text/template" id="tpl-tomato-item">
+        <div class="tomato-item">
+            <label><%=title %></label>
+            <!--<button class="destroy"></button>-->
+        </div>
+    </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../static/js/jquery.js"></script>
     <script src="../static/js/underscore.js"></script>
@@ -125,10 +134,11 @@
     <!--<script src="../static/js/bootstrap-select.js"></script>-->
     <script src="../static/js/flatui-checkbox.js"></script>
     <script src="../static/js/flatui-radio.js"></script>
-
-    <script src="../static/js/app/view/tormato_view.js"></script>
+    <script src="../static/js/app/model/tomato.js"></script>
+    <script src="../static/js/app/collection/tomatos.js"></script>
+    <script src="../static/js/app/view/tormato.js"></script>
+    <script src="../static/js/app/view/tormatodo.js"></script>
     <script src="../static/js/app/router/router.js"></script>
     <script src="../static/js/app/application.js"></script>
-
   </body>
 </html>
