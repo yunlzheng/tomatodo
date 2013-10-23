@@ -28,8 +28,6 @@ def load_model(func):
 
 class BackboneHandler(tornado.web.RequestHandler):
 
-    auth = False
-
     def initialize(self, auth=False):
         self.auth = auth
 
@@ -83,8 +81,7 @@ class BackboneHandler(tornado.web.RequestHandler):
 
 class MongoBackboneHandler(BackboneHandler):
 
-    model = None
-
+    
     def encode(self, data):
         return data.to_json()
 
@@ -100,8 +97,7 @@ class MongoBackboneHandler(BackboneHandler):
 
     @load_model
     def get_collection(self, *args):
-        print ">>>>>>>>>>>>>>>>>>"
-        print self.model
+     
         return self.model.objects()
 
     @load_model
