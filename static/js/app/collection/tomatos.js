@@ -20,4 +20,4 @@ var TomatoList = Backbone.Collection.extend({
 
 });
 
-app.Tomatos = new TomatoList()
+app.Tomatos = new TomatoList();

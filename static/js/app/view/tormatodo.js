@@ -8,30 +8,55 @@ app.Tormato = Backbone.View.extend({
 
 	clock: null,
 
-	template: _.template( $("#tormato-init-template").html() ),
-
 	events: {
 		'click .btn-start': 'startTomato',
         'click .btn-finish': 'finishTomato',
         'click #btn_giveup': 'giveupTomato',
-        'keypress #txt_tomato_summary': 'createTomatoOnEnter'
+        'keypress #txt_tomato_summary': 'createTomatoOnEnter',
+        'keypress #txt_todo_input': 'createTodoOnEnter',
 	},
 
 	initialize: function() {
-
+        // 番茄相关
         this.$tomato = this.$("#tomato");
         this.$tomato_list = this.$("#tomato-list");
         this.$tomato_staus = this.$("#tomato-status");
-
+        this.$trigger = this.$('.trigger');
+        this.$clock = this.$('.clock');
+        this.$summary = this.$('.summary');
+        this.$clock_display = this.$('.clock_display');
+        this.$input_summary = this.$("#txt_tomato_summary");
         this.listenTo(app.Tomatos, 'add', this.addOneTomato);
         this.listenTo(app.Tomatos, 'reset', this.addAllTomato);
-        this.listenTo(app.Tomatos, 'all', this.render);
+        this.listenTo(app.Tomatos, 'all', this.renderTomato);
+
+        //todo 
+        this.$todo_list = this.$('#todo-list');
+        this.$todo_empty = this.$("#todo-empty");
+        this.$input_todo = this.$('#txt_todo_input');
 
         app.Tomatos.fetch();
+        app.Todos.fetch();
 		
 	},
 
-	render: function() {
+    renderTodo: function(){
+
+        if( app.Todos.length ){
+
+            this.$todo_list.show();
+            this.$todo_empty.hide();
+        
+        }else{
+        
+            this.$todo_list.hide();
+            this.$todo_empty.show();
+            
+        }
+
+    },
+
+    renderTomato: function(){
 
         if( app.Tomatos.length ){
 
@@ -45,13 +70,14 @@ app.Tormato = Backbone.View.extend({
 
         }
 
-		this.$tomato.html( this.template() );
-        // 番茄相关
-		this.$trigger = this.$('.trigger');
-		this.$clock = this.$('.clock');
-        this.$summary = this.$('.summary');
-		this.$clock_display = this.$('.clock_display');
-        this.$input_summary = this.$("#txt_tomato_summary");
+    },
+
+   
+
+	render: function() {
+
+		// this.$tomato.html( this.template() );
+     
 		return this;
 
 	},
@@ -73,6 +99,10 @@ app.Tormato = Backbone.View.extend({
 
     createTomatoOnEnter: function(event){
 
+       
+        var $p = this.$input_summary.parent('.form-group');
+        $p.removeClass('has-error');
+
         if( event.which !==ENTER_KET || !this.$input_summary.val().trim()){
             return;
         }
@@ -82,10 +112,38 @@ app.Tormato = Backbone.View.extend({
 
     },
 
+    createTodoOnEnter: function(event){
+
+        if( event.which !==ENTER_KET || !this.$input_todo.val().trim()){
+            return;
+        }
+        app.Todos.create(this.newTodoAttributes());
+        this.$input_todo.val('');
+    },
+
+    newTodoAttributes: function(){
+
+        return {
+            title: this.$input_todo.val().trim(),
+            completed: false,
+            completed_at: this.getCurrentTime(),
+            created_at: this.getCurrentTime()
+        };
+
+    },
+
     //完成一个番茄
     finishTomato: function(){
 
-        app.Tomatos.create({ title : this.$input_summary.val() });
+        var value = this.$input_summary.val().trim();
+        var $p = this.$input_summary.parent('.form-group');
+        if (!value){
+            $p.addClass('has-error');
+            this.$input_summary.focus();
+            return;
+        }
+        $p.removeClass('has-error');
+        app.Tomatos.create({ title :  value, created_at: this.getCurrentTime()});
         this.$input_summary.val("");
         this.$summary.hide();
         this.$trigger.show();
@@ -114,14 +172,16 @@ app.Tormato = Backbone.View.extend({
 		this.clock = window.setInterval(function(){
 
 			if ( window.senconds > 0 ){
+
 				var leftsecond = --window.senconds;
-				var day1=Math.floor(leftsecond/(60*60*24)); 
-				var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
-				var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
-				var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+				var day1 = Math.floor(leftsecond/(60*60*24)); 
+				var hour = Math.floor((leftsecond-day1*24*60*60)/3600); 
+				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
 				var tmp = minute+"分"+second+"秒";
 				that.$clock_display.text(tmp);
-			}else{
+			
+            }else{
 				that.summaryTomato();
 			}
 			
@@ -138,7 +198,7 @@ app.Tormato = Backbone.View.extend({
         this.$input_summary.focus();
         //调用html5 audio播放提示音
          var hasVideo = !!(document.createElement('video').canPlayType);
-         if(hasVideo==true){
+         if(hasVideo===true){
              //播放提示音
              var snd = new Audio("/static/voice/notification.mp3"); // buffers automatically when created
              snd.play();
@@ -148,7 +208,7 @@ app.Tormato = Backbone.View.extend({
         if(window.webkitNotifications){
             //浏览器功能检测
             //console.log("Notifications are supported!");
-            if (window.webkitNotifications.checkPermission() == 0) {
+            if (window.webkitNotifications.checkPermission() === 0) {
 
                  var notification = window.webkitNotifications.createNotification(
                         "../static/icons/clock.jpg", "又完成一个番茄", "总结一下这个番茄完成的工作");
@@ -163,6 +223,13 @@ app.Tormato = Backbone.View.extend({
                  window.webkitNotifications.requestPermission();
              }
         }
-	}
+	},
+
+    getCurrentTime: function(){
+
+        var date = new Date();
+        return date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+
+    }
 
 });

@@ -8,7 +8,7 @@ app.Tomato = Backbone.Model.extend({
     urlRoot: '/rest/tomato',
     defaults: {
         title:"",
-        created_at:""
+        created_at:"1990-12-31"
     },
 
     parse: function(response) {

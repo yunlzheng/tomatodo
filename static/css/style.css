@@ -128,12 +128,13 @@ body{
 
 #tomato-list .tomato-item .tomato-name h6{
     color: #34495E;
-    font-size: 17px;
+    font-size: 14px;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     display: inline-block;
     float: left;
     margin:0;
     margin-left: 5px;
+    text-align: left;
 }
 
 #tomato-list .tomato-item .tomato-created{
@@ -182,7 +183,16 @@ body{
     margin-top:20px;
 }
 
+
+.jobs .tomato-status,#tomato-list{
+    display: none;
+}
+
 .footer{
      background-color: #EDEFF1;
     margin-top:30px;
+}
+
+.todo #todo-list,#todo-empty{
+    display: none;
 }

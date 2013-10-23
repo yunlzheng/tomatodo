@@ -12,10 +12,12 @@ app.TomatoView = Backbone.View.extend({
     template: _.template( $('#tpl-tomato-item').html() ),
 
     events: {
+
       'click .tomato-trash': 'clear',
       'dblclick .tomato-name': 'edit',
       'blur  .tomato-edit' : 'done',
       'keypress .tomato-edit': 'doneOnEnter'
+    
     },
 
     initialize: function() {
