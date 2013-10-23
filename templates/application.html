@@ -72,16 +72,20 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="well well-sm jobs">
-                        <img class="icon" src="../static/icons/loop.svg"/>
+                        <div>
+                             <img class="icon" src="../static/icons/loop.svg"/>
+                            <div>还没有完成的Tomoto</div>
+                        </div>
                     </div>
                 </div>
-                <div id="tomato" class="col-md-4">
-                    
-                </div>
+                <div id="tomato" class="col-md-4"></div>
                 <div class="col-md-4">
                     <div class="well well-sm todo">
                         <input type="text" value="" placeholder="添加任务" class="form-control">
-                        <img class="icon" src="../static/icons/clipboard.svg"/>
+                        <div>
+                            <img class="icon" src="../static/icons/clipboard.svg"/>
+                            <div>空的任务列表.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,12 +103,16 @@
       <div class="well well-sm tomato">
           <div class='trigger'>
             <img class="icon" src="../static/icons/clocks.svg"/>
-            <a class="btn btn-block btn-lg btn-primary">Start New Tomato</a>
+            <a class="btn-start btn btn-block btn-lg btn-primary ">开始一个新的番茄</a>
           </div>
           <div class='clock'>
-              <div class="clock_display"></div>
+              <div class="clock_display">即将开始...</div>
+              <div><a id="btn_giveup" href="#">放弃这个番茄...</a></div>
           </div>
-          
+          <div class="summary">
+              <input type="text" id="txt_tomato_summary" value="" placeholder="上一次任务完成的工作" class="form-control">
+              <a class="btn-finish btn btn-block btn-lg btn-primary">完成</a>
+          </div>
       </div>
     </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

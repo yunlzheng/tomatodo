@@ -50,19 +50,36 @@ body{
 }
 
 .jumps .jobs,.todo .icon{
-    opacity: 0.5;
+    opacity: 0.9;
 }
 
 .jumps .tomato{
 
+
+}
+
+.jumps .tomato  .icon{
+    margin-bottom: 40px;
+}
+
+.jumps .tomato .clock, .summary{
+    display: none;
+    position: relative;
+}
+
+.jumps .tomato .summary .btn-finish{
+
+    margin-top: 160px;
 }
 
 .jumps .tomato .clock{
     text-align: center;
     vertical-align: middle;
-    height: 240px;
-    height: 240px;
-    line-height: 200px;
+    padding-top: 80px;
+}
+
+.jumps .jobs  .icon{
+    margin-top: 80px;
 }
 
 .jumps .tomato .clock .clock_display{
@@ -71,7 +88,7 @@ body{
 }
 
 .jumps .icon{
-    margin:40px;
+    margin-top:40px;
 }
 
 .footer{
