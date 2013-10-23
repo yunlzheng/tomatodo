@@ -60,7 +60,7 @@ app.Tormato = Backbone.View.extend({
 
         var view = new app.TomatoView( { model: tomato } );
         this.$tomato_list.prepend( view.render().el );
-       
+
     },
 
     addAllTomato: function(){

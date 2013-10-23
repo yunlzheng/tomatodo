@@ -120,8 +120,11 @@
     </script>
     <script type="text/template" id="tpl-tomato-item">
         <div class="tomato-item">
-            <label><%=title %></label>
+            <div class="tomato-name"><h6><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<%=title %>&nbsp;<span class="tomato-created"><%=created_at %></span></h6></div>
+            <div class="tomato-trash" title="删除"><span class="glyphicon glyphicon-trash"></span></div>
+            <input type="text" value="" placeholder="编辑：<%=title %>" class="tomato-edit form-control"/>
             <!--<button class="destroy"></button>-->
+            <div class="clearfix"></div>
         </div>
     </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

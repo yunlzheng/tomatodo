@@ -1,3 +1,18 @@
+::-webkit-scrollbar {
+    width: 4px;
+    height: 12px;
+    -webkit-border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+background: #1ABC9C;
+-webkit-border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(245, 245, 245);
+}
+
 body{
 
      background-color: #EDEFF1;
@@ -43,14 +58,14 @@ body{
 .jumps .todo{
     border-width: 4px;
     border-radius: 5px 5px 0px 0px;
-    background-color: #1ABC9C;
+    background-color: #EDEFF1;
     border-bottom: none;
 }
 
 .jumps .jobs{
     border-width: 4px;
     border-radius: 5px 5px 0px 0px;
-    background-color: #1ABC9C;
+    background-color: #EDEFF1;
     border-top: none;
 }
 
@@ -65,11 +80,15 @@ body{
 
 #tomato-list{
     padding: 0px;
+    overflow: auto;
+    height: 232px;
 }
 
 #tomato-list li{
 
-    background-color: #EDEFF1;
+    padding: 8px;
+    background-color: #FFF;
+    border:2px solid #FFF;
     list-style: none;
     background-size: 20px 20px;
     cursor: pointer;
@@ -79,17 +98,58 @@ body{
     position: relative;
     -webkit-transition: 0.25s;
     transition: 0.25s;
+    border-radius: 5px;
 
 }
 
-#tomato-list .tomato-item label{
-    color: #1ABC9C;
+#tomato-list li:hover{
+    /*border:2px solid #1ABC9C;*/
+}
+
+#tomato-list li .tomato-edit{
+    display: none;
+}
+
+#tomato-list .editing .tomato-edit{
+    display: block;
+}
+
+#tomato-list .editing:hover .tomato-trash{
+    display: none;
+}
+
+#tomato-list li:hover .tomato-trash{
+    display: block;
+}
+
+#tomato-list .editing .tomato-name,.tomato-trash{
+    display: none;
+}
+
+#tomato-list .tomato-item .tomato-name h6{
+    color: #34495E;
     font-size: 17px;
-    margin: 1px 0 3px;
-   font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    display: inline-block;
+    float: left;
+    margin:0;
+    margin-left: 5px;
+}
+
+#tomato-list .tomato-item .tomato-created{
+    color:#1ABC9C;
+    font-size:12px;
+}
+
+
+#tomato-list .tomato-item .tomato-trash{
+    float: right;
+    margin-right: 15px;
+    display: none;
 }
 
 .jumps .tomato  .icon{
+    margin-top: 60px;
     margin-bottom: 40px;
 }
 
@@ -110,7 +170,7 @@ body{
 }
 
 .jumps .jobs  .icon{
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 .jumps .tomato .clock .clock_display{
@@ -119,7 +179,7 @@ body{
 }
 
 .jumps .icon{
-    margin-top:40px;
+    margin-top:20px;
 }
 
 .footer{
