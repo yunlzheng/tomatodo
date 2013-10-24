@@ -7,11 +7,15 @@ var app = app || {};
 
 app.TodoView = Backbone.View.extend({
 
-    tagName: "li",
+    tagName: "div",
+
+    className: "item",
 
     template: _.template( $('#tpl-todo-item').html() ),
 
-    events: {},
+    events: {
+        'click .trash': 'clear'
+    },
 
     initialize: function() {
         this.listenTo(this.model, 'change', this.render);

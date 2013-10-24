@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>tomatodo</title>
+    <title>TT-番茄</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="../static/css/flat-ui.css" rel="stylesheet" media="screen">
     <link href="../static/css/style.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="../static/icons/favicon.ico">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../static/js/html5shiv.js"></script>
@@ -70,12 +71,10 @@
     <div id="tomotodo" class="jumps">
         <div class="container">
             <div class="row">
-                
-                
                 <div class="col-md-4">
-                    <div class="well well-sm todo">
+                    <div class="well well-sm itodo">
                         <input id="txt_todo_input" type="text" value="" placeholder="添加任务" class="form-control">
-                        <ul id="todo-list"></ul>
+                        <div id="todo-list" class="list"></div>
                         <div id="todo-empty">
                             <img class="icon" src="../static/icons/clipboard.svg"/>
                             <div>空的任务列表.</div>
@@ -102,9 +101,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="well well-sm jobs">
-                        <ul id="tomato-list">
-
-                        </ul>
+                        <div id="tomato-list" class="list"></div>
                         <div id="tomato-status">
                              <img class="icon" src="../static/icons/loop.svg"/>
                              <div>还没有完成的Tomoto</div>
@@ -122,27 +119,36 @@
 
         </div>
     </div>
+
     <script type="text/template" id="tpl-todo-item">
-        <div class="todo-item">
-            <div class="todo-name">
+            <div class="todo-title title">
               <h6>
-                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <input type="checkbox"/>
                 &nbsp;<%=title %>&nbsp;
-                <span class="tomdo-created"><%=created_at %></span>
+                <span class="created"><%=created_at %></span>
               </h6>
             </div>
-            <div class="todo-trash" title="删除"><span class="glyphicon glyphicon-trash"></span></div>
-        </div>
-    </script>
-    <script type="text/template" id="tpl-tomato-item">
-        <div class="tomato-item">
-            <div class="tomato-name"><h6><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<%=title %>&nbsp;<span class="tomato-created"><%=created_at %></span></h6></div>
-            <div class="tomato-trash" title="删除"><span class="glyphicon glyphicon-trash"></span></div>
-            <input type="text" value="" placeholder="编辑：<%=title %>" class="tomato-edit form-control"/>
-            <!--<button class="destroy"></button>-->
+            <div class="trash" title="删除">
+                <span class="glyphicon glyphicon-trash"></span>
+            </div>
             <div class="clearfix"></div>
-        </div>
     </script>
+
+    <script type="text/template" id="tpl-tomato-item">
+        <div class="tomato-name title">
+            <h6>
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                &nbsp;<%=title %>&nbsp;
+                <span class="tomato-created"><%=created_at %></span>
+            </h6>
+        </div>
+        <div class="trash" title="删除">
+            <span class="glyphicon glyphicon-trash"></span>
+        </div>
+        <input type="text" value="" placeholder="编辑：<%=title %>" class="tomato-edit form-control"/>
+        <div class="clearfix"></div>
+    </script>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../static/js/lib/jquery.js"></script>
     <script src="../static/js/lib/underscore.js"></script>

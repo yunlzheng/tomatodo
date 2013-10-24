@@ -7,14 +7,16 @@ var app = app || {};
 
 app.TomatoView = Backbone.View.extend({
 
-    tagName: "li",
+    tagName: "div",
+
+    className: "item",
 
     template: _.template( $('#tpl-tomato-item').html() ),
 
     events: {
 
-      'click .tomato-trash': 'clear',
-      'dblclick .tomato-name': 'edit',
+      'click .trash': 'clear',
+      'dblclick .title': 'edit',
       'blur  .tomato-edit' : 'done',
       'keypress .tomato-edit': 'doneOnEnter'
     

@@ -1,5 +1,5 @@
 var app = app || {};
-var SENCONDS = 1500; //25 minutes
+var SENCONDS = 3; //25 minutes
 var ENTER_KET = 13;
 
 app.Tormato = Backbone.View.extend({
@@ -13,7 +13,7 @@ app.Tormato = Backbone.View.extend({
         'click .btn-finish': 'finishTomato',
         'click #btn_giveup': 'giveupTomato',
         'keypress #txt_tomato_summary': 'createTomatoOnEnter',
-        'keypress #txt_todo_input': 'createTodoOnEnter',
+        'keypress #txt_todo_input': 'createTodoOnEnter'
 	},
 
 	initialize: function() {
@@ -34,6 +34,9 @@ app.Tormato = Backbone.View.extend({
         this.$todo_list = this.$('#todo-list');
         this.$todo_empty = this.$("#todo-empty");
         this.$input_todo = this.$('#txt_todo_input');
+        this.listenTo(app.Todos, 'add', this.addOneTodo);
+        this.listenTo(app.Todos, 'reset', this.addAllTodo);
+        this.listenTo(app.Todos, 'all', this.renderTodo);
 
         app.Tomatos.fetch();
         app.Todos.fetch();
@@ -89,11 +92,23 @@ app.Tormato = Backbone.View.extend({
 
     },
 
+    addOneTodo: function(todo){
+        var view = new app.TodoView( { model:todo } );
+        this.$todo_list.append( view.render().el );
+    },
+
     addAllTomato: function(){
 
         this.$tomato_list.html("");
 
         app.Tomatos.each(this.addOneTomato, this);
+
+    },
+
+    addAllTodo: function(){
+
+        this.$todo_list.html("");
+        app.Todos.each(this.addOneTodo, this);
 
     },
 
@@ -213,11 +228,6 @@ app.Tormato = Backbone.View.extend({
                  var notification = window.webkitNotifications.createNotification(
                         "../static/icons/clock.jpg", "又完成一个番茄", "总结一下这个番茄完成的工作");
                  notification.show();
-                 window.setTimeout(function(){
-
-                    notification.cancel();
-
-                 }, 5000);
 
              }else{
                  window.webkitNotifications.requestPermission();
