@@ -184,11 +184,11 @@ body{
     display: none;
 }
 
-.list .item .tomato-edit{
+.list .item .edit{
     display: none;
 }
 
-.list .editing .tomato-edit{
+.list .editing .edit{
     display: block;
 }
 

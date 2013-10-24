@@ -121,7 +121,7 @@
     </div>
 
     <script type="text/template" id="tpl-todo-item">
-            <div class="todo-title title">
+            <div class="title">
               <h6>
                 <input type="checkbox"/>
                 &nbsp;<%=title %>&nbsp;
@@ -131,6 +131,7 @@
             <div class="trash" title="删除">
                 <span class="glyphicon glyphicon-trash"></span>
             </div>
+            <input type="text" value="" placeholder="编辑：<%=title %>" class="edit form-control"/>
             <div class="clearfix"></div>
     </script>
 
@@ -145,7 +146,7 @@
         <div class="trash" title="删除">
             <span class="glyphicon glyphicon-trash"></span>
         </div>
-        <input type="text" value="" placeholder="编辑：<%=title %>" class="tomato-edit form-control"/>
+        <input type="text" value="" placeholder="编辑：<%=title %>" class="edit tomato-edit form-control"/>
         <div class="clearfix"></div>
     </script>
 

@@ -17,8 +17,8 @@ app.TomatoView = Backbone.View.extend({
 
       'click .trash': 'clear',
       'dblclick .title': 'edit',
-      'blur  .tomato-edit' : 'done',
-      'keypress .tomato-edit': 'doneOnEnter'
+      'blur  .edit' : 'done',
+      'keypress .edit': 'doneOnEnter'
     
     },
 
@@ -30,13 +30,14 @@ app.TomatoView = Backbone.View.extend({
     render: function() {
 
         this.$el.html( this.template(this.model.toJSON()) );
-        this.$tomatoEdit = this.$(".tomato-edit");
+        this.$tomatoEdit = this.$(".edit");
         return this;
     },
 
     edit: function(){
 
         this.$el.addClass('editing');
+        this.$tomatoEdit.focus();
 
     },
 
