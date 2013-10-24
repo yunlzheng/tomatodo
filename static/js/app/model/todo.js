@@ -28,6 +28,12 @@ app.Todo = Backbone.Model.extend({
     parseDate: function(datetime){
       var day2 = new Date(datetime);
       var localString = day2.getFullYear()+"-"+(day2.getMonth()+1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
+    },
+
+    toggle: function(){
+        this.save({
+            completed: !this.get('completed')
+        });
     }
 
 });

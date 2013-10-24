@@ -123,9 +123,10 @@
     <script type="text/template" id="tpl-todo-item">
             <div class="title">
               <h6>
-                <input type="checkbox"/>
-                &nbsp;<%=title %>&nbsp;
-                <span class="created"><%=created_at %></span>
+                  <label class="toggle checkbox" >
+                    <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input type="checkbox" value="" data-toggle="checkbox">
+                     &nbsp;<%=title %>&nbsp;<span class="created"><%=created_at %></span>
+                  </label>
               </h6>
             </div>
             <div class="trash" title="删除">

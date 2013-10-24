@@ -17,7 +17,8 @@ app.TodoView = Backbone.View.extend({
         'click .trash': 'clear',
         'dblclick .title': 'edit',
         'blur .edit':'done',
-        'keypress .edit':'doneOnEnter'
+        'keypress .edit':'doneOnEnter',
+        'click .toggle':'toggleCompleted'
     },
 
     initialize: function() {
@@ -29,6 +30,10 @@ app.TodoView = Backbone.View.extend({
 
         this.$el.html( this.template(this.model.toJSON()) );
         this.$edit = this.$(".edit");
+        this.$check = this.$('.toggle');
+        this.$el.toggleClass('completed', this.model.get('completed'));
+        this.$check.toggleClass('checked', this.model.get('completed'));
+        this.toggleVisible();
         return this;
     },
 
@@ -57,8 +62,25 @@ app.TodoView = Backbone.View.extend({
 
     },
 
+    toggleCompleted: function( e ){
+        this.model.toggle();
+        this.$check.toggleClass('checked', this.model.get('completed'));
+        return true;
+    },
+
+    toggleVisible: function(){
+        this.$el.toggleClass('hidden', this.isHidden());
+    },
+
     clear: function(){
         this.model.destroy();
+    },
+
+    isHidden: function(){
+
+        var isCompleted = this.model.get('completed');
+        return false;
+
     }
 
 });

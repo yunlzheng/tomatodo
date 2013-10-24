@@ -169,7 +169,6 @@ body{
     display: none;
 }
 
-
 .list .item:hover .trash{
     display: block;
 }
@@ -177,8 +176,6 @@ body{
 .list .editing .title{
     display: none;
 }
-
-
 
 .list .editing:hover .trash{
     display: none;
@@ -207,4 +204,12 @@ body{
 .list .item .created{
     color:#1ABC9C;
     font-size:12px;
+}
+
+.list .completed{
+    opacity: 0.4;
+}
+
+.list .completed .title h6{
+    text-decoration: line-through;
 }
