@@ -67,24 +67,47 @@
             </div>
       </div>
     </div>
-    <div class="jumps">
+    <div id="tomotodo" class="jumps">
         <div class="container">
             <div class="row">
+                
+                
                 <div class="col-md-4">
-                    <div class="well well-sm jobs">
-                        <div>
-                             <img class="icon" src="../static/icons/loop.svg"/>
-                            <div>还没有完成的Tomoto</div>
+                    <div class="well well-sm todo">
+                        <input id="txt_todo_input" type="text" value="" placeholder="添加任务" class="form-control">
+                        <ul id="todo-list"></ul>
+                        <div id="todo-empty">
+                            <img class="icon" src="../static/icons/clipboard.svg"/>
+                            <div>空的任务列表.</div>
                         </div>
                     </div>
                 </div>
-                <div id="tomato" class="col-md-4"></div>
+                <div id="tomato" class="col-md-4">
+                  <div class="well well-sm tomato">
+                      <div class='trigger'>
+                        <img class="icon" src="../static/icons/clocks.svg"/>
+                        <a class="btn-start btn btn-block btn-lg btn-primary ">开始一个新的番茄</a>
+                      </div>
+                      <div class='clock'>
+                          <div class="clock_display">即将开始...</div>
+                          <div><a id="btn_giveup" href="#">放弃这个番茄...</a></div>
+                      </div>
+                      <div class="summary">
+                        <div class="form-group">
+                          <input type="text" id="txt_tomato_summary" value="" placeholder="上一次任务完成的工作" class="form-control">
+                        </div>
+                        <a class="btn-finish btn btn-block btn-lg btn-primary">完成</a>
+                      </div>
+                  </div>
+                </div>
                 <div class="col-md-4">
-                    <div class="well well-sm todo">
-                        <input type="text" value="" placeholder="添加任务" class="form-control">
-                        <div>
-                            <img class="icon" src="../static/icons/clipboard.svg"/>
-                            <div>空的任务列表.</div>
+                    <div class="well well-sm jobs">
+                        <ul id="tomato-list">
+
+                        </ul>
+                        <div id="tomato-status">
+                             <img class="icon" src="../static/icons/loop.svg"/>
+                             <div>还没有完成的Tomoto</div>
                         </div>
                     </div>
                 </div>
@@ -99,36 +122,46 @@
 
         </div>
     </div>
-    <script type="text/template" id="tormato-init-template">
-      <div class="well well-sm tomato">
-          <div class='trigger'>
-            <img class="icon" src="../static/icons/clocks.svg"/>
-            <a class="btn-start btn btn-block btn-lg btn-primary ">开始一个新的番茄</a>
-          </div>
-          <div class='clock'>
-              <div class="clock_display">即将开始...</div>
-              <div><a id="btn_giveup" href="#">放弃这个番茄...</a></div>
-          </div>
-          <div class="summary">
-              <input type="text" id="txt_tomato_summary" value="" placeholder="上一次任务完成的工作" class="form-control">
-              <a class="btn-finish btn btn-block btn-lg btn-primary">完成</a>
-          </div>
-      </div>
+    <script type="text/template" id="tpl-todo-item">
+        <div class="todo-item">
+            <div class="todo-name">
+              <h6>
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                &nbsp;<%=title %>&nbsp;
+                <span class="tomdo-created"><%=created_at %></span>
+              </h6>
+            </div>
+            <div class="todo-trash" title="删除"><span class="glyphicon glyphicon-trash"></span></div>
+        </div>
+    </script>
+    <script type="text/template" id="tpl-tomato-item">
+        <div class="tomato-item">
+            <div class="tomato-name"><h6><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<%=title %>&nbsp;<span class="tomato-created"><%=created_at %></span></h6></div>
+            <div class="tomato-trash" title="删除"><span class="glyphicon glyphicon-trash"></span></div>
+            <input type="text" value="" placeholder="编辑：<%=title %>" class="tomato-edit form-control"/>
+            <!--<button class="destroy"></button>-->
+            <div class="clearfix"></div>
+        </div>
     </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/underscore.js"></script>
-    <script src="../static/js/backbone.js"></script>
+    <script src="../static/js/lib/jquery.js"></script>
+    <script src="../static/js/lib/underscore.js"></script>
+    <script src="../static/js/lib/backbone.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/lib/bootstrap.min.js"></script>
     <!--<script src="../static/js/bootstrap-switch.js"></script>-->
     <!--<script src="../static/js/bootstrap-select.js"></script>-->
-    <script src="../static/js/flatui-checkbox.js"></script>
-    <script src="../static/js/flatui-radio.js"></script>
+    <script src="../static/js/lib/flatui-checkbox.js"></script>
+    <script src="../static/js/lib/flatui-radio.js"></script>
 
-    <script src="../static/js/app/view/tormato_view.js"></script>
+    <script src="../static/js/app/model/todo.js"></script>
+    <script src="../static/js/app/model/tomato.js"></script>
+    <script src="../static/js/app/collection/todos.js"></script>
+    <script src="../static/js/app/collection/tomatos.js"></script>
+    <script src="../static/js/app/view/todo.js"></script>
+    <script src="../static/js/app/view/tormato.js"></script>
+    <script src="../static/js/app/view/tormatodo.js"></script>
     <script src="../static/js/app/router/router.js"></script>
     <script src="../static/js/app/application.js"></script>
-
   </body>
 </html>
