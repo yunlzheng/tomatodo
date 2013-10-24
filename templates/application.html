@@ -86,16 +86,22 @@
                       <div class='trigger'>
                         <img class="icon" src="../static/icons/clocks.svg"/>
                         <a class="btn-start btn btn-block btn-lg btn-primary ">开始工作</a>
+                        <a class="btn-start-rest btn btn-block btn-lg btn-default">开始休息</a>
                       </div>
                       <div class='clock'>
                           <div class="clock_display">即将开始...</div>
-                          <div><a id="btn_giveup" href="#">放弃这个番茄...</a></div>
+                          <div>
+                              <a id="btn_giveup" href="#">放弃这个番茄...</a>
+                              <a class="clock_info">休息时间</a>
+                          </div>
+
                       </div>
                       <div class="summary">
                         <div class="form-group">
                           <input type="text" id="txt_tomato_summary" value="" placeholder="上一次任务完成的工作" class="form-control">
                         </div>
                         <a class="btn-finish btn btn-block btn-lg btn-primary">完成</a>
+                        <a class="btn-rest-onfinish btn btn-block btn-lg btn-default">开始休息</a>
                       </div>
                   </div>
                 </div>

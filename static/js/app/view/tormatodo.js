@@ -1,5 +1,6 @@
 var app = app || {};
-var SENCONDS = 3; //25 minutes
+var SENCONDS = 1500; //25 minutes
+var RESTTIME = 300; //5 minutes
 var ENTER_KET = 13;
 
 app.Tormato = Backbone.View.extend({
@@ -10,8 +11,10 @@ app.Tormato = Backbone.View.extend({
 
 	events: {
 		'click .btn-start': 'startTomato',
-        'click .btn-finish': 'finishTomato',
+        'click .btn-finish': 'finishTomato', //完成一个番茄并，返回初始页面
         'click #btn_giveup': 'giveupTomato',
+        'click .btn-start-rest': 'startRest',
+        'click .btn-rest-onfinish': 'startRestOnFinish',
         'keypress #txt_tomato_summary': 'createTomatoOnEnter',
         'keypress #txt_todo_input': 'createTodoOnEnter'
 	},
@@ -37,6 +40,8 @@ app.Tormato = Backbone.View.extend({
         this.listenTo(app.Todos, 'add', this.addOneTodo);
         this.listenTo(app.Todos, 'reset', this.addAllTodo);
         this.listenTo(app.Todos, 'all', this.renderTodo);
+
+        this.resetTomato();
 
         app.Tomatos.fetch();
         app.Todos.fetch();
@@ -75,12 +80,9 @@ app.Tormato = Backbone.View.extend({
 
     },
 
-   
-
 	render: function() {
 
 		// this.$tomato.html( this.template() );
-     
 		return this;
 
 	},
@@ -94,7 +96,7 @@ app.Tormato = Backbone.View.extend({
 
     addOneTodo: function(todo){
         var view = new app.TodoView( { model:todo } );
-        this.$todo_list.append( view.render().el );
+        this.$todo_list.prepend( view.render().el );
     },
 
     addAllTomato: function(){
@@ -148,20 +150,37 @@ app.Tormato = Backbone.View.extend({
     },
 
     //完成一个番茄
-    finishTomato: function(){
+    createTomato: function(){
 
         var value = this.$input_summary.val().trim();
         var $p = this.$input_summary.parent('.form-group');
         if (!value){
             $p.addClass('has-error');
             this.$input_summary.focus();
-            return;
+            return false;
         }
         $p.removeClass('has-error');
         app.Tomatos.create({ title :  value, created_at: this.getCurrentTime()});
-        this.$input_summary.val("");
+        return true;
+
+    },
+
+    finishTomato: function(){
+        if(this.createTomato()){
+             this.resetTomato();
+            return true;
+        }
+        return false;
+    },
+
+    resetTomato: function(){
+
+        this.$('.clock_info').hide();
+        this.$('#btn_giveup').show();
         this.$summary.hide();
         this.$trigger.show();
+        this.$clock.hide();
+        this.$input_summary.val("");
         this.$clock_display.text("任务即将开始");
 
     },
@@ -203,6 +222,46 @@ app.Tormato = Backbone.View.extend({
 		}, 1000);
 
 	},
+
+    startRestOnFinish: function(){
+
+        if(this.finishTomato()){
+             this.startRest();
+        }
+
+    },
+
+    //直接开始休息
+    startRest: function(){
+
+        window.senconds = RESTTIME;
+		var that = this;
+		this.$trigger.hide();
+		this.$clock.show();
+        this.$clock_display.text("休息时间");
+        this.$('#btn_giveup').hide();
+        this.$('.clock_info').show();
+		this.clock = window.setInterval(function(){
+
+			if ( window.senconds > 0 ){
+
+				var leftsecond = --window.senconds;
+				var day1 = Math.floor(leftsecond/(60*60*24));
+				var hour = Math.floor((leftsecond-day1*24*60*60)/3600);
+				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
+				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+				var tmp = minute+"分"+second+"秒";
+				that.$clock_display.text(tmp);
+
+            }else{
+
+                that.resetTomato();
+
+            }
+
+		}, 1000);
+
+    },
 
     //总结一个番茄
 	summaryTomato: function(){

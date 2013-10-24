@@ -47,10 +47,11 @@ body{
 }
 
 .jumps .well{
-    min-height: 280px;
+    min-height: 340px;
+    height: 340px;
 }
 
-.jumps .jobs,.tomato,itodo{
+.jumps .jobs,.tomato,.itodo{
     padding-top: 20px;
     text-align: center;
 }
@@ -81,7 +82,7 @@ body{
 
 .jumps .tomato  .icon{
     margin-top: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .jumps .tomato .clock, .summary{
@@ -134,14 +135,20 @@ body{
 
 #todo-list{
 
+    padding: 0px;
+    overflow: auto;
+    max-height: 257px;
 
 }
 
+#txt_todo_input{
+    margin-bottom: 5px;
+}
 
 #tomato-list{
     padding: 0px;
     overflow: auto;
-    height: 232px;
+    height: 290px;
 }
 
 .list, .item{
