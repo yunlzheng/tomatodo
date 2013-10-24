@@ -47,8 +47,8 @@ body{
 }
 
 .jumps .well{
-    min-height: 340px;
-    height: 340px;
+    min-height: 320px;
+    height: 320px;
 }
 
 .jumps .jobs,.tomato,.itodo{
@@ -60,14 +60,13 @@ body{
     border-width: 4px;
     border-radius: 5px 5px 0px 0px;
     background-color: #EDEFF1;
-    border-bottom: none;
 }
 
 .jumps .jobs{
     border-width: 4px;
     border-radius: 5px 5px 0px 0px;
     background-color: #EDEFF1;
-    border-top: none;
+
 }
 
 .jumps .jobs,.itodo .icon{
@@ -82,7 +81,7 @@ body{
 
 .jumps .tomato  .icon{
     margin-top: 60px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .jumps .tomato .clock, .summary{
@@ -102,16 +101,18 @@ body{
 }
 
 .jumps .jobs  .icon{
-    margin-top: 65px;
+    margin-top: 90px;
 }
 
 .jumps .tomato .clock .clock_display{
-    font-weight: bolder;
-    font-size: 50px;
+    font-size: 100px;
+    line-height: 1.2;
+    color: #999;
+    font-weight: 100;
 }
 
 .jumps .icon{
-    margin-top:20px;
+    margin-top:40px;
 }
 
 
@@ -121,7 +122,6 @@ body{
 
 .footer{
      background-color: #EDEFF1;
-    margin-top:30px;
 }
 
 #todo-list,#todo-empty{
@@ -225,4 +225,8 @@ body{
 
 .list .completed .title h6{
     text-decoration: line-through;
+}
+
+#btn_giveup{
+    margin-top:40px;
 }

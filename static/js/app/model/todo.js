@@ -17,17 +17,18 @@ app.Todo = Backbone.Model.extend({
           response.id = response._id.$oid;
           response.created_at = response.created_at.$date;
           response.created_at = this.parseDate(response.create_at);
-
           response.completed_at = response.completed_at.$date;
           response.completed_at = this.parseDate(response.completed_at);
-
           delete response._id;
           return response;
     },
 
     parseDate: function(datetime){
+
+      console.log(datetime)
       var day2 = new Date(datetime);
       var localString = day2.getFullYear()+"-"+(day2.getMonth()+1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
+      return ""
     },
 
     toggle: function(){

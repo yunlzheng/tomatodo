@@ -73,12 +73,12 @@ app.TodoView = Backbone.View.extend({
     },
 
     clear: function(){
+
         this.model.destroy();
     },
 
     isHidden: function(){
 
-        var isCompleted = this.model.get('completed');
         return false;
 
     }

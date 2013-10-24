@@ -181,7 +181,7 @@ app.Tormato = Backbone.View.extend({
         this.$trigger.show();
         this.$clock.hide();
         this.$input_summary.val("");
-        this.$clock_display.text("任务即将开始");
+        this.$clock_display.text("25:00");
 
     },
 
@@ -212,7 +212,7 @@ app.Tormato = Backbone.View.extend({
 				var hour = Math.floor((leftsecond-day1*24*60*60)/3600); 
 				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
 				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
-				var tmp = minute+"分"+second+"秒";
+				var tmp = minute+":"+second;
 				that.$clock_display.text(tmp);
 			
             }else{
@@ -238,7 +238,7 @@ app.Tormato = Backbone.View.extend({
 		var that = this;
 		this.$trigger.hide();
 		this.$clock.show();
-        this.$clock_display.text("休息时间");
+        this.$clock_display.text("5:00");
         this.$('#btn_giveup').hide();
         this.$('.clock_info').show();
 		this.clock = window.setInterval(function(){
@@ -250,7 +250,7 @@ app.Tormato = Backbone.View.extend({
 				var hour = Math.floor((leftsecond-day1*24*60*60)/3600);
 				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
 				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
-				var tmp = minute+"分"+second+"秒";
+				var tmp = minute+":"+second;
 				that.$clock_display.text(tmp);
 
             }else{
