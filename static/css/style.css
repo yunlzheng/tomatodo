@@ -196,9 +196,15 @@ body{
     font-family: "Lato", Helvetica, Arial, sans-serif;
     display: inline-block;
     float: left;
-    margin:0;
+    margin:0px;
     margin-left: 5px;
     text-align: left;
+    line-height: 1.6em;
+}
+
+.list .item .title h6 .checkbox{
+    float: left;
+    margin: 0px;
 }
 
 .list .item .created{
