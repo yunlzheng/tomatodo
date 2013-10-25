@@ -13,6 +13,45 @@ background: #1ABC9C;
     background: rgb(245, 245, 245);
 }
 
+@keyframes clock{
+
+    0%{
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);		/* IE 9 */
+        -webkit-transform: rotate(0deg);	/* Safari and Chrome */
+        -o-transform: rotate(0deg);		/* Opera */
+        -moz-transform: rotate(0deg);
+    }
+
+
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);		/* IE 9 */
+        -webkit-transform: rotate(360deg);	/* Safari and Chrome */
+        -o-transform: rotate(360deg);		/* Opera */
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes clock{
+
+    0%{
+        transform: rotate(1deg);
+        -ms-transform: rotate(1deg);		/* IE 9 */
+        -webkit-transform: rotate(1deg);	/* Safari and Chrome */
+        -o-transform: rotate(1deg);		/* Opera */
+        -moz-transform: rotate(1deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);		/* IE 9 */
+        -webkit-transform: rotate(360deg);	/* Safari and Chrome */
+        -o-transform: rotate(360deg);		/* Opera */
+        -moz-transform: rotate(360deg);
+    }
+}
+
 body{
 
      background-color: #EDEFF1;
@@ -66,22 +105,33 @@ body{
     border-width: 4px;
     border-radius: 5px 5px 0px 0px;
     background-color: #EDEFF1;
-
 }
 
 .jumps .jobs,.itodo .icon{
 
 }
 
-.jumps .tomato{
-
-
-}
-
-
-.jumps .tomato  .icon{
+.tomato-clock{
     margin-top: 60px;
     margin-bottom: 30px;
+}
+
+.run{
+    animation: clock 30s;
+    animation-iteration-count: linear;
+    animation-timing-function: value;
+
+    -moz-animation: clock 30s;	/* Firefox */
+    -moz-animation-iteration-count: linear;
+    -moz-animation-iteration-count: infinite;
+
+    -webkit-animation: clock 30s;	/* Safari 和 Chrome */
+    -webkit-animation-iteration-count: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -o-animation: clock 30s;
+    -o-animation-iteration-count: linear;
+    -o-animation-iteration-count: infinite;
 }
 
 .jumps .tomato .clock, .summary{
