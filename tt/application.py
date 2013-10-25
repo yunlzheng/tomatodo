@@ -37,7 +37,7 @@ class Application(tornado.web.Application):
             template_path=TEMPLATE_DIR,
             static_path=STATIC_DIR,
             login_url="/sigin",
-            regist_url='/sigup',
+            register_url='/sigup',
             logout_url='/sigout',
             debug=options.debug,
             cookie_secret="123456"
