@@ -4,3 +4,16 @@ body{
     overflow: hidden;
     background-color: #1ABC9C;
 }
+
+.container{
+    margin-top: 100px;
+}
+
+.login-form{
+    text-align: right;
+}
+
+.login-form .login-link{
+    display: inline-block;
+    margin-left: 10px;
+}
