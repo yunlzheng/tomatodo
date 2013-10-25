@@ -7,7 +7,14 @@ class LoginHandler(Base):
 
     def get(self):
         self.render("login.html")
-        
+
+
+class LogoutHandler(Base):
+
+    def get(self):
+        self.clear_all_cookies()
+        self.redirect('/')
+
 
 class RegisterHandler(Base):
 
