@@ -287,6 +287,12 @@ app.Tormato = Backbone.View.extend({
                  var notification = window.webkitNotifications.createNotification(
                         "../static/icons/clock.jpg", "又完成一个番茄", "总结一下这个番茄完成的工作");
                  notification.show();
+                 notification.onclick=function(){
+
+                     //聚焦浏览器
+                     $(window).focus();
+
+                 };
 
              }else{
                  window.webkitNotifications.requestPermission();
