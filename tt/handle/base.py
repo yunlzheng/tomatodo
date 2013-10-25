@@ -4,5 +4,9 @@ __author__ = 'zheng'
 
 
 class Base(tornado.web.RequestHandler):
+
     def get_current_user(self):
-        pass
+        return self.get_secure_cookie('email')
+
+    def get_sigup_url(self):
+        return self.settings['regist_url']

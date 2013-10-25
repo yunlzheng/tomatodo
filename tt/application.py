@@ -7,7 +7,7 @@ import tornado.ioloop
 from tornado.log import app_log
 from tornado.options import define, options
 from mongoengine import connect
-from tt.handle import MainHandler, MongoBackboneHandler, LoginHandler
+from tt.handle import MainHandler, MongoBackboneHandler, LoginHandler, RegisterHandler
 
 PROJECT_DIR = dirname(dirname(abspath(__file__)))
 TEMPLATE_DIR = os.path.join(PROJECT_DIR, 'templates')
@@ -27,6 +27,7 @@ class Application(tornado.web.Application):
         handlers = {
             (r'/', MainHandler),
             (r'/sigin', LoginHandler),
+            (r'/sigup', RegisterHandler),
             (r'/rest/([a-z]+)', MongoBackboneHandler),
             (r'/rest/([a-z]+)/(.+)', MongoBackboneHandler)
         }
@@ -35,6 +36,7 @@ class Application(tornado.web.Application):
             template_path=TEMPLATE_DIR,
             static_path=STATIC_DIR,
             login_url="/sigin",
+            regist_url='/sigup',
             debug=options.debug,
             cookie_secret="123456"
         )
