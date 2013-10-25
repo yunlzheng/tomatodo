@@ -198,7 +198,7 @@ body{
 #tomato-list{
     padding: 0px;
     overflow: auto;
-    height: 290px;
+    max-height: 290px;
 }
 
 .list, .item{
