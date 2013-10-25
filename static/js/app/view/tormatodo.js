@@ -1,5 +1,5 @@
 var app = app || {};
-var SENCONDS = 1500; //25 minutes
+var SENCONDS = 4; //25 minutes
 var RESTTIME = 300; //5 minutes
 var ENTER_KET = 13;
 
@@ -181,7 +181,7 @@ app.Tormato = Backbone.View.extend({
         this.$trigger.show();
         this.$clock.hide();
         this.$input_summary.val("");
-        this.$clock_display.text("25:00");
+        this.$clock_display.text("00:00");
 
     },
 

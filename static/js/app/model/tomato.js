@@ -18,6 +18,7 @@ app.Tomato = Backbone.Model.extend({
           var localString = day2.getFullYear()+"-"+(day2.getMonth()+1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
           response.created_at = localString;
           delete response._id;
+          delete response.user;
           return response;
     }
 

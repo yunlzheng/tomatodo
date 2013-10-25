@@ -4,6 +4,8 @@ import functools
 import tornado.web
 from tornado.log import app_log
 from tornado.util import import_object
+from .base import Base
+from tt.model.user import User
 
 
 def load_model(func):
@@ -26,14 +28,14 @@ def load_model(func):
     return wrapper
 
 
-class BackboneHandler(tornado.web.RequestHandler):
+class BackboneHandler(Base):
 
     def initialize(self, auth=True):
         self.auth = auth
 
     def prepare(self):
         if self.auth:
-            if not self.current_user:
+            if not self.get_current_user():
                 raise tornado.web.HTTPError(403)
 
     def encode(self, data):
@@ -42,22 +44,22 @@ class BackboneHandler(tornado.web.RequestHandler):
     def decode(self, data):
         return json.loads(data)
 
-    def get(self, *args):
+    def get(self, *args, **kwargs):
         self.set_header("Content-Type", "application/json; charset=UTF-8")
         if self.is_get_collection(*args):
             self.write(self.encode(self.get_collection(*args)))
         else:
             self.write(self.encode(self.get_model(*args)))
 
-    def post(self, *args):
+    def post(self, *args,  **kwargs):
         resp = self.encode(self.create_model(*args))
         self.write(resp)
 
-    def put(self, *args):
+    def put(self, *args,  **kwargs):
         resp = self.encode(self.update_model(*args))
         self.write(resp)
 
-    def delete(self, *args):
+    def delete(self, *args,  **kwargs):
         self.delete_model(*args)
 
     def is_get_collection(self, *args):
@@ -66,7 +68,7 @@ class BackboneHandler(tornado.web.RequestHandler):
     def create_model(self, obj, *args):
         raise tornado.web.HTTPError(404)
 
-    def get_collection(self, *args):
+    def get_collection(self, *args,  **kwargs):
         raise tornado.web.HTTPError(404)
 
     def get_model(self, *args):
@@ -95,9 +97,12 @@ class MongoBackboneHandler(BackboneHandler):
             return instance
 
     @load_model
-    def get_collection(self, *args):
-
-        return self.model.objects()
+    def get_collection(self, *args, **kwargs):
+        params = {}
+        if self.current_user:
+            user = User.objects(email=self.current_user).first()
+            params['user'] = user
+        return self.model.objects(**params)
 
     @load_model
     def delete_model(self, *args):
@@ -111,9 +116,11 @@ class MongoBackboneHandler(BackboneHandler):
 
     @load_model
     def create_model(self, *args):
-        #print obj
-        obj = self.decode(self.request.body)
-        obj = self.model(**obj)
+        params = self.decode(self.request.body)
+        if self.current_user:
+            user = User.objects(email=self.current_user).first()
+            params['user'] = user
+        obj = self.model(**params)
         obj.save()
         return obj
 

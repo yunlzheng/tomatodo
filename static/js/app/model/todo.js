@@ -20,15 +20,19 @@ app.Todo = Backbone.Model.extend({
           response.completed_at = response.completed_at.$date;
           response.completed_at = this.parseDate(response.completed_at);
           delete response._id;
+          delete response.user;
           return response;
     },
 
     parseDate: function(datetime){
 
-      console.log(datetime)
-      var day2 = new Date(datetime);
+      if( datetime == undefined ){
+          return ""
+      }
+      var day2 = new Date(parseInt(datetime));
       var localString = day2.getFullYear()+"-"+(day2.getMonth()+1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
-      return ""
+      return localString;
+
     },
 
     toggle: function(){
