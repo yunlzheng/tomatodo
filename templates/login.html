@@ -27,17 +27,19 @@
             </div>
             <div class="col-md-4">
                 <div class="login-form">
-                    <div class="form-group">
-                      <input type="text" class="form-control login-field" value="" placeholder="登录邮箱" id="login-name">
-                      <label class="login-field-icon fui-user" for="login-name"></label>
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control login-field" value="" placeholder="登录密码" id="login-pass">
-                      <label class="login-field-icon fui-lock" for="login-pass"></label>
-                    </div>
-                    <a class="btn btn-primary btn-lg btn-block" href="#">登录</a>
-                    <a class="login-link" href="/sigup">注册新账号</a>
-                    <a class="login-link" href="#">忘记密码?</a>
+                    <form id="login-form" method="post">
+                        <div class="form-group">
+                          <input type="text" class="form-control login-field" value="" name="email" placeholder="登录邮箱" id="login-name">
+                          <label class="login-field-icon fui-user" for="login-name"></label>
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control login-field" value="" name="password" placeholder="登录密码" id="login-pass">
+                          <label class="login-field-icon fui-lock" for="login-pass"></label>
+                        </div>
+                        <a class="btn btn-primary btn-lg btn-block btn-submit" href="#">登录</a>
+                        <a class="login-link" href="/sigup">注册新账号</a>
+                        <a class="login-link" href="#">忘记密码?</a>
+                    </form>
                  </div>
             </div>
             <div class="col-md-3"></div>

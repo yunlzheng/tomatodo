@@ -10,6 +10,22 @@ class LoginHandler(Base):
     def get(self):
         self.render("login.html")
 
+    def post(self):
+        errors = []
+        email = self.get_argument('email', None)
+        password = self.get_argument('password', None)
+        if not email:
+            errors.append('email reqired')
+        if not password:
+            errors.append('password required')
+
+        user = User.objects(email=email, password=password).first()
+        if user:
+            self.set_secure_cookie('email', email)
+            self.redirect('/')
+        else:
+            self.redirect(self.get_login_url(), errors)
+
 
 class LogoutHandler(Base):
 
