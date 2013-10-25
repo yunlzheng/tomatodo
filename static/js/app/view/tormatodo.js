@@ -1,5 +1,5 @@
 var app = app || {};
-var SENCONDS = 4; //25 minutes
+var SENCONDS = 1500; //25 minutes
 var RESTTIME = 300; //5 minutes
 var ENTER_KET = 13;
 
@@ -181,7 +181,7 @@ app.Tormato = Backbone.View.extend({
         this.$trigger.show();
         this.$clock.hide();
         this.$input_summary.val("");
-        this.$clock_display.text("00:00");
+        this.$clock_display.text("");
 
     },
 
@@ -203,8 +203,10 @@ app.Tormato = Backbone.View.extend({
 		var that = this;
 		this.$trigger.hide();
 		this.$clock.show();
+        that.$clock_display.text("25 min");
 		this.clock = window.setInterval(function(){
 
+            
 			if ( window.senconds > 0 ){
 
 				var leftsecond = --window.senconds;
@@ -212,7 +214,12 @@ app.Tormato = Backbone.View.extend({
 				var hour = Math.floor((leftsecond-day1*24*60*60)/3600); 
 				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
 				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
-				var tmp = minute+":"+second;
+				var tmp;
+                if(minute>0){
+                    tmp = minute+" min";
+                }else{
+                    tmp = second+" sec";
+                }
 				that.$clock_display.text(tmp);
 			
             }else{
@@ -238,9 +245,10 @@ app.Tormato = Backbone.View.extend({
 		var that = this;
 		this.$trigger.hide();
 		this.$clock.show();
-        this.$clock_display.text("5:00");
+        
         this.$('#btn_giveup').hide();
         this.$('.clock_info').show();
+        that.$clock_display.text("5 min");
 		this.clock = window.setInterval(function(){
 
 			if ( window.senconds > 0 ){
@@ -250,8 +258,13 @@ app.Tormato = Backbone.View.extend({
 				var hour = Math.floor((leftsecond-day1*24*60*60)/3600);
 				var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
 				var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
-				var tmp = minute+":"+second;
-				that.$clock_display.text(tmp);
+
+				if(minute>0){
+                    tmp = minute+" min";
+                }else{
+                    tmp = second+" sec";
+                }
+                that.$clock_display.text(tmp);
 
             }else{
 

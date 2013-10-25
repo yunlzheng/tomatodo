@@ -52,6 +52,24 @@ background: #1ABC9C;
     }
 }
 
+@keyframes times{
+    0% {
+        opacity: 1;
+    },
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes times{
+    0% {
+        opacity: 1;
+    },
+    100% {
+        opacity: 0;
+    }
+}
+
 body{
 
      background-color: #EDEFF1;
@@ -117,21 +135,12 @@ body{
 }
 
 .run{
-    animation: clock 30s;
-    animation-iteration-count: linear;
-    animation-timing-function: value;
 
-    -moz-animation: clock 30s;	/* Firefox */
-    -moz-animation-iteration-count: linear;
-    -moz-animation-iteration-count: infinite;
-
-    -webkit-animation: clock 30s;	/* Safari 和 Chrome */
-    -webkit-animation-iteration-count: linear;
-    -webkit-animation-iteration-count: infinite;
-
-    -o-animation: clock 30s;
-    -o-animation-iteration-count: linear;
-    -o-animation-iteration-count: infinite;
+    animation:clock 10s infinite linear ;
+    -webkit-animation:clock 10s infinite linear ;
+    -moz-animation:clock 10s infinite linear ;
+    -0-animation:clock 10s infinite linear ;
+    
 }
 
 .jumps .tomato .clock, .summary{
@@ -147,7 +156,7 @@ body{
 .jumps .tomato .clock{
     text-align: center;
     vertical-align: middle;
-    padding-top: 80px;
+    
 }
 
 .jumps .jobs  .icon{
@@ -155,10 +164,14 @@ body{
 }
 
 .jumps .tomato .clock .clock_display{
-    font-size: 100px;
-    line-height: 1.2;
+    font-size: 40px;
+    line-height: 1em;
     color: #999;
     font-weight: 100;
+    animation:times 1s infinite linear ;
+    -webkit-animation:times 1s infinite linear ;
+    -moz-animation:times 1s infinite linear ;
+    -0-animation:times 1s infinite linear ;
 }
 
 .jumps .icon{
@@ -278,5 +291,10 @@ body{
 }
 
 #btn_giveup{
-    margin-top:40px;
+    margin-top:22px;
+}
+
+.bs-masthead-links li {
+display: inline-block;
+padding: 4px 8px;
 }
