@@ -1,5 +1,5 @@
 var app = app || {};
-var SENCONDS = 1500; //25 minutes
+var SENCONDS = 5; //25 minutes
 var RESTTIME = 300; //5 minutes
 var ENTER_KET = 13;
 
@@ -16,9 +16,11 @@ app.Tormato = Backbone.View.extend({
         'click .btn-start-rest': 'startRest',
         'click .btn-rest-onfinish': 'startRestOnFinish',
         'keypress #txt_tomato_summary': 'createTomatoOnEnter',
-        'keypress #txt_todo_input': 'createTodoOnEnter'
+        'keypress #txt_todo_input': 'createTodoOnEnter',
+        'click .settings':'test'
 	},
 
+  
 	initialize: function() {
         // 番茄相关
         this.$tomato = this.$("#tomato");

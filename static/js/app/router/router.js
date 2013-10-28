@@ -3,16 +3,19 @@ var app = app || {};
 var Workspace = Backbone.Router.extend({
 
 	routes: {
-		"*test": 'testRouter'
+		"settings": 'settings',
+		"/": 'default'
 	},
 
-	testRouter: function( param ) {
+	initialize: function(options) {
 
-		if(param){
+		$('.settings').hide();
 
-			console.log(param);
+	},
 
-		}
+	settings: function( param ) {
+
+		$('.settings').show();
 
 	}
 
